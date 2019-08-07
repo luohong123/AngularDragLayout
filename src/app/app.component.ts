@@ -44,6 +44,7 @@ export class AppComponent {
    * @param event 
    */
   dragover_handler(event) {
+    event.preventDefault();
     if (event.target.className.includes('container')) {
       this.appendContainer()
 

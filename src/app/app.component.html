@@ -4,7 +4,7 @@
       <i nz-icon nzType="layout" nzTheme="outline"></i>
       <span>可视化布局</span>
     </div>
-    <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
+    <ul nz-menu [nzSelectable]="false" nzTheme="dark" nzMode="horizontal" class="header-menu">
       <li nz-menu-item>
         <i nz-icon class="header-icon" nzType="github" nzTheme="outline"></i></li>
       <li nz-menu-item>
@@ -37,7 +37,7 @@
           <ul>
             <li nz-menu-item>
               <input nz-input class="grid-setting" [(ngModel)]="grid1" nzSize="small" />
-              <drag-button class="drag" draggable="true" (dragstart)="dragstart_handler($event,'grid1')">
+              <drag-button class="drag" [draggable]="true" (dragstart)="dragstart_handler($event,'grid1')">
               </drag-button>
             </li>
             <li nz-menu-item>
@@ -73,7 +73,7 @@
       </ul>
     </nz-sider>
     <nz-layout class="inner-layout">
-      <nz-content class="container" #container (drop)="drop_handler($event)" (dragover)="dragover_handler($event)">
+      <nz-content class="container" #container (dragover)="dragover_handler($event)" (drop)="drop_handler($event)">
         <!-- 拖拽组件到这里 -->
         <drag-grid></drag-grid>
       </nz-content>

@@ -7,6 +7,9 @@ import { Component } from '@angular/core';
   button.drag-button .anticon {
     margin-right: 0;
   }
+  .drag-button {
+    background: #E84279;
+  }
   `]
 })
 export class DragbuttonComponent {

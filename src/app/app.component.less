@@ -7,13 +7,14 @@
 .logo {
   height: 64px;
   line-height: 64px;
-  background: rgba(255, 255, 255, 0.2);
   margin: 16px 30px 16px 0;
   float: left;
   color: #fff;
   font-size: 26px;
   margin: 0 20px 0 0;
   white-space: nowrap;
+  font-family: "IBM Plex Mono ExtraLight", "Segoe UI", "Helvetica Neue", Helvetica, Roboto, 'Open Sans', FreeSans, sans-serif;
+  font-style: italic;
 }
 
 .logo i {
@@ -26,6 +27,15 @@
 
 .header-menu {
   line-height: 64px;
+}
+
+.header-menu .ant-btn {
+  background: #E84279;
+  border: #E84279;
+
+  &:hover {
+    background: #f7256b;
+  }
 }
 
 .header-menu .header-icon {
@@ -45,21 +55,21 @@
 
 .inner-layout {
   padding: 20px;
-  background: #fff;
+  background: #222831;
 }
 
 .inner-layout .container {
-  border: 1px solid #ebedf0;
   position: relative;
+  background: rgba(236, 198, 48, .1);
+  padding: 30px 20px;
 }
 
 .inner-layout .container::after {
   content: 'container';
-  width: 66px;
-  height: 26px;
-  line-height: 26px;
+  height: 22px;
+  line-height: 22px;
   padding: 0 2px;
-  background-color: rgb(190, 200, 200);
+  background-color: #E84279;
   color: #fff;
   position: absolute;
   left: 0;
