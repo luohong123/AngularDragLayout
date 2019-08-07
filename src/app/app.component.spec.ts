@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'ngantd-drag-form'`, () => {
+  it(`should have as title 'AngularDragLayout'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('ngantd-drag-form');
+    expect(app.title).toEqual('AngularDragLayout');
   });
 
   it('should render title in a h1 tag', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to ngantd-drag-form!');
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome to AngularDragLayout!');
   });
 });

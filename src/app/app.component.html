@@ -1,21 +1,82 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
-<router-outlet></router-outlet>
+<nz-layout class="layout-wrap">
+  <nz-header>
+    <div class="logo">
+      <i nz-icon nzType="layout" nzTheme="outline"></i>
+      <span>可视化布局</span>
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
+      <li nz-menu-item>
+        <i nz-icon class="header-icon" nzType="github" nzTheme="outline"></i></li>
+      <li nz-menu-item>
+        <nz-button-group [nzSize]="small">
+          <button nz-button nzType="primary"><i nz-icon nzType="edit" nzTheme="outline"></i>编辑</button>
+          <button nz-button nzType="primary"><i nz-icon nzType="form" nzTheme="outline"></i>布局编辑</button>
+          <button nz-button nzType="primary"><i nz-icon nzType="eye" nzTheme="outline"></i>预览</button>
+        </nz-button-group>
+      </li>
+      <li nz-menu-item>
+        <nz-button-group [nzSize]="small">
+          <button nz-button nzType="primary"><i nz-icon nzType="cloud-download" nzTheme="outline"></i>下载</button>
+          <button nz-button nzType="primary"><i nz-icon nzType="export" nzTheme="outline"></i>导出</button>
+          <button nz-button nzType="primary"><i nz-icon nzType="save" nzTheme="outline"></i>保存</button>
+          <button nz-button nzType="primary"><i nz-icon nzType="delete" nzTheme="outline"></i>清空</button>
+        </nz-button-group>
+      </li>
+      <li nz-menu-item>
+        <nz-button-group [nzSize]="small">
+          <button nz-button nzType="primary"><i nz-icon nzType="rollback" nzTheme="outline"></i>撤销</button>
+          <button nz-button nzType="primary"><i nz-icon nzType="retweet" nzTheme="outline"></i>重做</button>
+        </nz-button-group>
+      </li>
+    </ul>
+  </nz-header>
+  <nz-layout>
+    <nz-sider nzWidth="200px">
+      <ul nz-menu nzMode="inline" nzTheme="dark" class="sider-menu">
+        <li nz-submenu nzOpen nzIcon="user" nzTitle="布局设置">
+          <ul>
+            <li nz-menu-item>
+              <input nz-input class="grid-setting" [(ngModel)]="grid1" nzSize="small" />
+              <drag-button class="drag" draggable="true" (dragstart)="dragstart_handler($event,'grid1')">
+              </drag-button>
+            </li>
+            <li nz-menu-item>
+              <input nz-input class="grid-setting" [(ngModel)]="grid2" nzSize="small" />
+              <drag-button class="drag" draggable="true" (dragstart)="dragstart_handler($event)"></drag-button>
+            </li>
+            <li nz-menu-item>
+              <input nz-input class="grid-setting" [(ngModel)]="grid3" nzSize="small" />
+              <drag-button class="drag"></drag-button>
+            </li>
+            <li nz-menu-item>
+              <input nz-input class="grid-setting" [(ngModel)]="grid4" nzSize="small" />
+              <drag-button class="drag"></drag-button>
+            </li>
+          </ul>
+        </li>
+        <li nz-submenu nzTitle="subnav 2" nzIcon="laptop">
+          <ul>
+            <li nz-menu-item>option5</li>
+            <li nz-menu-item>option6</li>
+            <li nz-menu-item>option7</li>
+            <li nz-menu-item>option8</li>
+          </ul>
+        </li>
+        <li nz-submenu nzTitle="subnav 3" nzIcon="notification">
+          <ul>
+            <li nz-menu-item>option9</li>
+            <li nz-menu-item>option10</li>
+            <li nz-menu-item>option11</li>
+            <li nz-menu-item>option12</li>
+          </ul>
+        </li>
+      </ul>
+    </nz-sider>
+    <nz-layout class="inner-layout">
+      <nz-content class="container" #container (drop)="drop_handler($event)" (dragover)="dragover_handler($event)">
+        <!-- 拖拽组件到这里 -->
+        <drag-grid></drag-grid>
+      </nz-content>
+    </nz-layout>
+  </nz-layout>
+</nz-layout>

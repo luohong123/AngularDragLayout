@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngantd-drag-form": {
+    "AngularDragLayout": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ngantd-drag-form",
+            "outputPath": "dist/AngularDragLayout",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -25,7 +25,12 @@
             "aot": false,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
             ],
             "styles": [
               "src/styles.less"
@@ -67,18 +72,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ngantd-drag-form:build"
+            "browserTarget": "AngularDragLayout:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ngantd-drag-form:build:production"
+              "browserTarget": "AngularDragLayout:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngantd-drag-form:build"
+            "browserTarget": "AngularDragLayout:build"
           }
         },
         "test": {
@@ -115,15 +120,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ngantd-drag-form:serve"
+            "devServerTarget": "AngularDragLayout:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ngantd-drag-form:serve:production"
+              "devServerTarget": "AngularDragLayout:serve:production"
             }
           }
         }
       }
-    }},
-  "defaultProject": "ngantd-drag-form"
+    }
+  },
+  "defaultProject": "AngularDragLayout"
 }
