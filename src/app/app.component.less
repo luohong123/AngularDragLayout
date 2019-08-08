@@ -60,8 +60,12 @@
 
 .inner-layout .container {
   position: relative;
-  background: rgba(236, 198, 48, .1);
+  background: transparent;
+  border: 2px solid #E84279;
   padding: 30px 20px;
+  height: 100%;
+  overflow: auto;
+  border-radius: 8px;
 }
 
 .inner-layout .container::after {
@@ -74,7 +78,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  border-radius: 2px;
+  border-bottom-right-radius: 2px;
 }
 
 nz-breadcrumb {

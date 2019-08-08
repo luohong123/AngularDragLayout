@@ -9,7 +9,10 @@ import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ComponentsModule } from './components/components.module';
-
+import { AditemService } from './core/aditem.service';
+import { AntduiModule } from './components/antd-ui/antdui.module';
+import { DragnameDirective } from './core/dragname.directive';
+import { DragService } from './core/drag.service';
 
 registerLocaleData(zh);
 
@@ -21,12 +24,15 @@ registerLocaleData(zh);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ComponentsModule
+    ComponentsModule,
+    AntduiModule
   ],
   declarations: [
-    AppComponent
+    AppComponent,
+    DragnameDirective
   ],
-  providers: [{ provide: NZ_I18N, useValue: zh_CN }],
+  providers: [{ provide: NZ_I18N, useValue: zh_CN }, AditemService,
+    DragService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
