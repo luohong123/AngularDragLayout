@@ -1,4 +1,13 @@
+/*
+ * @Author: luohong
+ * @Date: 2019-08-08 16:28:21
+ * @LastEditors: luohong
+ * @LastEditTime: 2019-08-09 17:54:03
+ * @Description: 拖拽核心方法
+ * @email: 3300536651@qq.com
+ */
 import { Injectable } from '@angular/core';
+import { STATIC_MODULE } from 'src/static';
 
 /**
  * @description: 拖拽单例服务

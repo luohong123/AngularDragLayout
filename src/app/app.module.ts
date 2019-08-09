@@ -1,3 +1,11 @@
+/*
+ * @Author: luohong
+ * @Date: 2019-08-07 10:32:58
+ * @LastEditors: luohong
+ * @LastEditTime: 2019-08-09 17:38:27
+ * @Description: 
+ * @email: 3300536651@qq.com
+ */
 import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import zh from '@angular/common/locales/zh';
@@ -13,7 +21,6 @@ import { AditemService } from './core/aditem.service';
 import { AntduiModule } from './components/antd-ui/antdui.module';
 import { DragnameDirective } from './core/dragname.directive';
 import { DragService } from './core/drag.service';
-
 registerLocaleData(zh);
 
 @NgModule({
