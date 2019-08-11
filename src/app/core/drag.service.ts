@@ -7,12 +7,11 @@
  * @email: 3300536651@qq.com
  */
 import { Injectable } from '@angular/core';
-import { STATIC_MODULE } from 'src/static';
 
 /**
  * @description: 拖拽单例服务
- * @param {type} 
- * @return:  
+ * @param {type}
+ * @return:
  */
 @Injectable()
 export class DragService {
@@ -20,7 +19,7 @@ export class DragService {
     data: any;
     /**
      * 开始拖拽动作
-     * @param event 
+     * @param event
      */
     dragstart_handler(event, handlerName): void {
         event.dataTransfer.setData(handlerName, null)
@@ -31,6 +30,6 @@ export class DragService {
     }
 
     accepts(zone: string): boolean {
-        return zone == this.zone;
+        return zone === this.zone;
     }
 }

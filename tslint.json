@@ -84,7 +84,20 @@
     "template-banana-in-box": true,
     "template-no-negated-async": true,
     "use-lifecycle-interface": true,
-    "use-pipe-transform-interface": true
+    "use-pipe-transform-interface": true,
+    "semicolon":false,
+    "align":false,
+    "prefer-const":false,
+    "no-string-literal":false,
+    "no-redundant-jsdoc":false,
+    "jsdoc-format":false,
+    "component-selector":false,
+    "directive-selector":false,
+    "no-var-keyword":false,
+    "one-variable-per-declaration":false,
+    "no-unused-expression":false,
+    "member-ordering":false,
+    "no-bitwise":false
   },
   "rulesDirectory": [
     "codelyzer"

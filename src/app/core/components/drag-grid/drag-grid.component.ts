@@ -1,23 +1,66 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
+import { CommonService } from 'src/app/common.service';
+
+export function structure() {
+  let attributes = {
+    title: {
+      type: 'text',
+      value: 'App Bar'
+    },
+    zDepth: {
+      type: 'slider',
+      value: 0,
+      max: 5,
+      min: 0,
+      step: 1
+    },
+    titleClass: {
+      type: 'text',
+      value: ''
+    }
+  };
+  let slots = {
+    left: [],
+    right: [],
+    default: []
+  }
+  let template = `
+  <div class="drag-grid">
+  <span class="row-mark">row ${attributes.title.value}00</span>
+  <div class="drag-grid-toolbar">
+    <button nz-button nzType="dashed" nzSize="small" nz-tooltip nzTitle="拖动" class="drag-button"><i nz-icon
+        nzType="drag"></i></button>
+    <button nz-button nzType="dashed" nzSize="small" nz-tooltip nzTitle="删除" class="drag-button"><i nz-icon
+        nzType="delete"></i></button>
+  </div>
+  <div nz-row nzGutter="32">
+    <div nz-col #7b75906a nzSpan="12" class="drag-grid-col">
+    </div>
+    <div nz-col #col nzSpan="12" class="drag-grid-col"></div>
+  </div>
+</div>
+  `
+  return { template, attributes, slots }
+}
 
 @Component({
   selector: 'drag-grid',
-  templateUrl: './drag-grid.component.html',
+  template: `${structure().template}`,
   styles: [`
     .drag-grid {
       color: #dfa612;
-      border: 2px solid #FAE042;
+      border: 2px solid #f2f4f5;
       padding: 30px 20px 20px;
       position: relative;
       margin: 10px;
       border-radius: 4px;
-      background: rgba(236, 198, 48, 0.1);
+      background: #e8e8e8;
     }
     .row-mark {
       height: 22px;
       line-height: 22px;
       padding: 0 2px;
-      background-color: #E84279;
+      background-color: rgb(190, 200, 200);
       color: #fff;
       position: absolute;
       left: 0;
@@ -25,19 +68,18 @@ import { Component } from '@angular/core';
       border-bottom-right-radius: 2px;
     }
     .drag-grid-col{
-      background: #1A1D24;
       padding: 40px 20px 20px;
       border-radius: 4px;
       position: relative;
-      box-shadow: inset 0 -3px 0 #242527;
-      border: 2px dashed #FAE042;
+      border: 1px solid rgb(190, 200, 200);
+      background: #fff;
     }
     .drag-grid-col::after{
       content: 'column';
       height: 22px;
       line-height: 22px;
       padding: 0 2px;
-      background-color: #E84279;
+      background-color: rgb(190, 200, 200);
       color: #fff;
       position: absolute;
       left: 0;
@@ -54,5 +96,10 @@ import { Component } from '@angular/core';
     }
   `]
 })
-export class DraggridComponent {
+export class DraggridComponent implements OnInit {
+  @HostBinding('id') id: string;
+  constructor() {
+  }
+  ngOnInit(): void {
+  }
 }

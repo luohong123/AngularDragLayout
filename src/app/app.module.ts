@@ -3,7 +3,7 @@
  * @Date: 2019-08-07 10:32:58
  * @LastEditors: luohong
  * @LastEditTime: 2019-08-09 17:38:27
- * @Description: 
+ * @Description:
  * @email: 3300536651@qq.com
  */
 import { registerLocaleData } from '@angular/common';
@@ -21,9 +21,16 @@ import { AditemService } from './core/aditem.service';
 import { AntduiModule } from './components/antd-ui/antdui.module';
 import { DragnameDirective } from './core/dragname.directive';
 import { DragService } from './core/drag.service';
+import { StoreService } from './core/store.service';
+import { ComponentService } from './components/component.service';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DraggridComponent } from './core/components/drag-grid/drag-grid.component';
 registerLocaleData(zh);
 
 @NgModule({
+  entryComponents: [
+    DraggridComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -32,14 +39,22 @@ registerLocaleData(zh);
     HttpClientModule,
     BrowserAnimationsModule,
     ComponentsModule,
-    AntduiModule
+    AntduiModule,
+    DragDropModule
   ],
   declarations: [
     AppComponent,
-    DragnameDirective
+    DragnameDirective,
+    DraggridComponent
   ],
-  providers: [{ provide: NZ_I18N, useValue: zh_CN }, AditemService,
-    DragService],
+  exports: [
+    DraggridComponent
+  ],
+  providers: [{ provide: NZ_I18N, useValue: zh_CN },
+    AditemService,
+    DragService,
+    StoreService,
+    ComponentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

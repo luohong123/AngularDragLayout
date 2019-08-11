@@ -7,6 +7,7 @@
  * @email: 3300536651@qq.com
  */
 import { Component, Type } from '@angular/core';
+import { NzRateModule } from 'ng-zorro-antd/rate';
 export function structure() {
   let attributes = {
     title: {
@@ -31,7 +32,7 @@ export function structure() {
     default: []
   }
   let template = `
-  <button nz-button nzType="primary">Primary${attributes.title.value}</button>
+  <nz-rate [ngModel]="0"></nz-rate>
   `
   return { template, attributes, slots }
 }
@@ -41,5 +42,5 @@ export function structure() {
   styles: [`
   `]
 })
-export class AntdbuttonComponent {
+export class AntdrateComponent {
 }

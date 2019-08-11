@@ -8,7 +8,6 @@ import { Component } from '@angular/core';
     margin-right: 0;
   }
   .drag-button {
-    background: #E84279;
   }
   `]
 })

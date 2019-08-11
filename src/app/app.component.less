@@ -23,18 +23,16 @@
 
 .layout-wrap .ant-layout-header {
   padding-left: 20px;
+  background: #1890ff;
 }
 
 .header-menu {
   line-height: 64px;
-}
+  background-color: #1890ff;
 
-.header-menu .ant-btn {
-  background: #E84279;
-  border: #E84279;
-
-  &:hover {
-    background: #f7256b;
+  & .item {
+    margin-right: 20px;
+    color: #fff;
   }
 }
 
@@ -46,22 +44,25 @@
   overflow: auto;
   height: 100%;
   border-right: 0;
+  border-left: 1px solid #ebedf0;
 }
 
 .sider-menu .drag {
   position: absolute;
   right: 5px;
+  top: 1px;
 }
 
 .inner-layout {
   padding: 20px;
-  background: #222831;
+  background: #fff;
+  // background: #222831;
 }
 
 .inner-layout .container {
   position: relative;
   background: transparent;
-  border: 2px solid #E84279;
+  border: 2px solid rgb(190, 200, 200);
   padding: 30px 20px;
   height: 100%;
   overflow: auto;
@@ -73,7 +74,7 @@
   height: 22px;
   line-height: 22px;
   padding: 0 2px;
-  background-color: #E84279;
+  background-color: rgb(190, 200, 200);
   color: #fff;
   position: absolute;
   left: 0;
