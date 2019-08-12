@@ -1,3 +1,11 @@
+<!--
+ * @Author: luohong
+ * @Date: 2019-08-12 09:09:29
+ * @LastEditors: luohong
+ * @LastEditTime: 2019-08-12 18:07:14
+ * @Description: 
+ * @email: 3300536651@qq.com
+ -->
 <nz-layout class="layout-wrap">
   <nz-header>
     <div class="logo">
@@ -12,14 +20,15 @@
       <nz-button-group class="item" nzSize="small">
         <button nz-button nzType="default"><i nz-icon nzType="edit" nzTheme="outline"></i>编辑</button>
         <button nz-button nzType="default"><i nz-icon nzType="form" nzTheme="outline"></i>布局编辑</button>
-        <button nz-button nzType="default"><i nz-icon nzType="eye" nzTheme="outline"></i>预览</button>
+        <button nz-button nzType="default" (click)="preview()"><i nz-icon nzType="eye" nzTheme="outline"></i>预览</button>
       </nz-button-group>
       <nz-button-group class="item" nzSize="small">
         <button nz-button nzType="default" (click)="openCode()"><i nz-icon nzType="code"
             nzTheme="outline"></i>CODE</button>
         <button nz-button nzType="default"><i nz-icon nzType="cloud-download" nzTheme="outline"></i>下载</button>
         <button nz-button nzType="default"><i nz-icon nzType="save" nzTheme="outline"></i>保存</button>
-        <button nz-button nzType="default"><i nz-icon nzType="delete" nzTheme="outline"></i>清空</button>
+        <button nz-button nzType="default" (click)="empty()"><i nz-icon nzType="delete"
+            nzTheme="outline"></i>清空</button>
       </nz-button-group>
       <nz-button-group class="item" nzSize="small">
         <button nz-button nzType="default"><i nz-icon nzType="rollback" nzTheme="outline"></i>撤销</button>
@@ -29,12 +38,11 @@
   </nz-header>
   <nz-layout>
     <!-- 拖拽组件 -->
-    <nz-sider nzWidth="200px">
+    <!-- <nz-sider nzWidth="200px">
       <ul nz-menu nzMode="inline" nzTheme="light" class="sider-menu">
         <li nz-menu-item>
           <nz-select style="width: 100px;" nzSize="small" [(ngModel)]="selectedUi" nzAllowClear nzPlaceHolder="请选择UI组件">
-            <nz-option nzValue="antd" nzLabel="antd"></nz-option>
-            <nz-option nzValue="material" nzLabel="material"></nz-option>
+            <nz-option [nzValue]="item.value" [nzLabel]="item.label" *ngFor="let item of uiTypes "></nz-option>
           </nz-select>
           - UI
         </li>
@@ -62,7 +70,6 @@
         <li nz-submenu nzOpen nzTitle="通用" nzIcon="laptop">
           <ul>
             <li nz-menu-item>
-              按钮
               <drag-button class="drag" [draggable]="true" dragName="button">
               </drag-button>
             </li>
@@ -84,27 +91,23 @@
           </ul>
         </li>
       </ul>
-    </nz-sider>
+    </nz-sider> -->
     <nz-layout class="inner-layout">
       <nz-content class="container" #container (dragover)="dragover_handler($event)"
         (dragenter)="dragenter_handler($event)" (drop)="drop_handler($event)">
         <!-- 拖拽组件到这里 -->
-        <!-- <div class="board">
-          <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-            <div class="example-box" *ngFor="let movie of movies" cdkDrag>{{movie}}</div>
-          </div>
-        </div> -->
+        
       </nz-content>
     </nz-layout>
     <!-- 定义组件属性 -->
     <nz-sider nzWidth="200px">
       <ul nz-menu nzMode="inline" nzTheme="light" class="sider-menu">
         <li nz-menu-item>
-          <nz-select style="width: 100px;" nzSize="small" [(ngModel)]="selectedUi" nzAllowClear nzPlaceHolder="请选择UI组件">
-            <nz-option nzValue="antd" nzLabel="antd"></nz-option>
-            <nz-option nzValue="material" nzLabel="material"></nz-option>
+          <nz-select style="width: 100px;" nzSize="small" [(ngModel)]="componentType" nzAllowClear
+            nzPlaceHolder="请选择UI组件">
+            <nz-option [nzValue]="item.name" [nzLabel]="item.label" *ngFor="let item of componentMarks"></nz-option>
           </nz-select>
-          组件
+          {{selectedComponent}}
         </li>
         <li nz-submenu nzOpen nzIcon="user" nzTitle="组件设置">
           <ul>
@@ -122,14 +125,12 @@
 </nz-layout>
 
 <!-- 预览代码 -->
-<nz-drawer [nzMask]="false" [nzClosable]="true" [nzVisible]="visible" [nzPlacement]="placement" nzTitle="代码预览"
-  (nzOnClose)="closeCode()" [nzBodyStyle]="{'overflow':'auto','height': '150px' }">
+<nz-drawer [nzMask]="false" [nzClosable]="true" nzWrapClassName="copyCode" [nzMaskStyle]="{'height':'0'}"
+  [nzVisible]="visible" [nzPlacement]="placement" nzTitle="代码预览" (nzOnClose)="closeCode()"
+  [nzBodyStyle]="{'overflow':'auto','height': '200px' }">
   <i nzTitle="复制代码" nz-tooltip nz-icon [nzType]="copied ? 'check' : 'snippets'" class="code-box-code-copy"
-    [class.ant-tooltip-open]="copied" (click)="copyCode(nzRawCode)"></i>
-  <pre class="language-angular"><code [innerHTML]="code"></code></pre>
-  1111
-  <pre class="language-angular"><code innerHTML="@Component({
-      selector: 'nz-demo-grid-basic',
-    })
-    export class NzDemoGridBasicComponent {}"></code></pre>
+    [ngStyle]="{'cursor':'pointer'}" [class.ant-tooltip-open]="copied" (click)="copyCode(nzRawCode)"></i>
+  <div>
+    <pre class="language-angular"><code [innerText]="code1"></code></pre>
+  </div>
 </nz-drawer>

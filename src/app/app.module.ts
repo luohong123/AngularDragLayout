@@ -2,10 +2,11 @@
  * @Author: luohong
  * @Date: 2019-08-07 10:32:58
  * @LastEditors: luohong
- * @LastEditTime: 2019-08-09 17:38:27
+ * @LastEditTime: 2019-08-12 18:02:49
  * @Description:
  * @email: 3300536651@qq.com
  */
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import zh from '@angular/common/locales/zh';
@@ -13,23 +14,29 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ComponentsModule } from './components/components.module';
-import { AditemService } from './core/aditem.service';
-import { AntduiModule } from './components/antd-ui/antdui.module';
-import { DragnameDirective } from './core/dragname.directive';
-import { DragService } from './core/drag.service';
-import { StoreService } from './core/store.service';
-import { ComponentService } from './components/component.service';
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { DraggridComponent } from './core/components/drag-grid/drag-grid.component';
+import { AntdtemplateModule } from './components/template/antd/antdtemplate.module';
+import { AntduiModule } from './components/ui/antd/antdui.module';
+
+import { CommonService } from './core/common/common.service';
+import { DragbuttonComponent } from './core/components/drag-button/drag-button.component';
+import { PreviewComponent } from './core/components/preview/preview.component';
+import { ShareComponent } from './core/components/share/share.component';
+import { DragnameDirective } from './core/directive/dragname.directive';
+import { AditemService } from './core/service/aditem.service';
+import { DragService } from './core/service/drag.service';
+import { StoreService } from './core/service/store.service';
+
+
 registerLocaleData(zh);
 
 @NgModule({
   entryComponents: [
-    DraggridComponent
+    PreviewComponent
   ],
   imports: [
     BrowserModule,
@@ -38,23 +45,28 @@ registerLocaleData(zh);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ComponentsModule,
+    DragDropModule,
     AntduiModule,
-    DragDropModule
+    AntdtemplateModule
   ],
   declarations: [
     AppComponent,
     DragnameDirective,
-    DraggridComponent
+    PreviewComponent,
+    ShareComponent,
+    DragbuttonComponent
   ],
   exports: [
-    DraggridComponent
   ],
-  providers: [{ provide: NZ_I18N, useValue: zh_CN },
+  providers: [
+    {
+      provide: NZ_I18N,
+      useValue: zh_CN
+    },
     AditemService,
+    CommonService,
     DragService,
-    StoreService,
-    ComponentService],
+    StoreService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

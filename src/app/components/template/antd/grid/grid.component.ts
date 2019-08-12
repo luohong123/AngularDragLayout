@@ -1,5 +1,12 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
-import { CommonService } from 'src/app/common.service';
+/*
+ * @Author: luohong
+ * @Date: 2019-08-12 09:09:29
+ * @LastEditors: luohong
+ * @LastEditTime: 2019-08-12 17:47:32
+ * @Description: 
+ * @email: 3300536651@qq.com
+ */
+import { Component, HostBinding, OnChanges, OnInit } from '@angular/core';
 
 export function structure() {
   let attributes = {
@@ -25,27 +32,29 @@ export function structure() {
     default: []
   }
   let template = `
-  <div class="drag-grid">
-  <span class="row-mark">row ${attributes.title.value}00</span>
-  <div class="drag-grid-toolbar">
-    <button nz-button nzType="dashed" nzSize="small" nz-tooltip nzTitle="拖动" class="drag-button"><i nz-icon
-        nzType="drag"></i></button>
-    <button nz-button nzType="dashed" nzSize="small" nz-tooltip nzTitle="删除" class="drag-button"><i nz-icon
-        nzType="delete"></i></button>
-  </div>
   <div nz-row nzGutter="32">
-    <div nz-col #7b75906a nzSpan="12" class="drag-grid-col">
+    <div nz-col  nzSpan="12">
     </div>
-    <div nz-col #col nzSpan="12" class="drag-grid-col"></div>
+    <div nz-col nzSpan="12"></div>
   </div>
-</div>
   `
   return { template, attributes, slots }
 }
 
 @Component({
-  selector: 'drag-grid',
-  template: `${structure().template}`,
+  selector: 'antd-grid-template',
+  template: ` 
+  <div class="drag-grid">
+    <span class="row-mark">row</span>
+    <div class="drag-grid-toolbar">
+      <button nz-button nzType="dashed" nzSize="small" nz-tooltip nzTitle="拖动" class="drag-button"><i nz-icon
+          nzType="drag"></i></button>
+      <button nz-button nzType="dashed" nzSize="small" nz-tooltip nzTitle="删除" class="drag-button"><i nz-icon
+          nzType="delete"></i></button>
+    </div>
+    ${structure().template}
+  </div>
+`,
   styles: [`
     .drag-grid {
       color: #dfa612;
@@ -67,14 +76,14 @@ export function structure() {
       top: 0;
       border-bottom-right-radius: 2px;
     }
-    .drag-grid-col{
+    .drag-grid .ant-row>div{
       padding: 40px 20px 20px;
       border-radius: 4px;
       position: relative;
       border: 1px solid rgb(190, 200, 200);
       background: #fff;
     }
-    .drag-grid-col::after{
+    .drag-grid .ant-row>div::after{
       content: 'column';
       height: 22px;
       line-height: 22px;
@@ -96,10 +105,23 @@ export function structure() {
     }
   `]
 })
-export class DraggridComponent implements OnInit {
+export class GridComponent implements OnInit, OnChanges {
+
   @HostBinding('id') id: string;
+
+  // 属性
+  attributes: any
   constructor() {
   }
   ngOnInit(): void {
+    this.getAttributes(this.id)
+
+  }
+  ngOnChanges(): void {
+  }
+  getAttributes(id: string) {
+    let obj = localStorage.getItem('store')
+    let template = structure().template
+    return template
   }
 }

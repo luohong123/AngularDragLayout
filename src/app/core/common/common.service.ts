@@ -1,8 +1,16 @@
+/*
+ * @Author: luohong
+ * @Date: 2019-08-12 09:09:29
+ * @LastEditors: luohong
+ * @LastEditTime: 2019-08-12 17:35:25
+ * @Description: 
+ * @email: 3300536651@qq.com
+ */
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class CommonService {
-    static uuidv4() {
+     uuidv4() {
         var d = new Date().getTime();
         if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
             d += performance.now(); 
