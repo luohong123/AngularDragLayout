@@ -3,7 +3,7 @@
  * @Date: 2019-08-12 09:09:29
  * @LastEditors: luohong
  * @LastEditTime: 2019-08-12 17:47:32
- * @Description: 
+ * @Description:
  * @email: 3300536651@qq.com
  */
 import { Component, HostBinding, OnChanges, OnInit } from '@angular/core';
@@ -43,7 +43,7 @@ export function structure() {
 
 @Component({
   selector: 'antd-grid-template',
-  template: ` 
+  template: `
   <div class="drag-grid">
     <span class="row-mark">row</span>
     <div class="drag-grid-toolbar">

@@ -20,7 +20,7 @@ import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AntdtemplateModule } from './components/template/antd/antdtemplate.module';
-import { AntduiModule } from './components/ui/antd/antdui.module';
+// import { AntduiModule } from './components/ui/antd/antdui.module';
 
 import { CommonService } from './core/common/common.service';
 import { DragbuttonComponent } from './core/components/drag-button/drag-button.component';
@@ -30,6 +30,8 @@ import { DragnameDirective } from './core/directive/dragname.directive';
 import { AditemService } from './core/service/aditem.service';
 import { DragService } from './core/service/drag.service';
 import { StoreService } from './core/service/store.service';
+import { MaterialuiModule } from './components/ui/material/materialui.module';
+import { AntduiModule } from './components/ui/antd/index.module';
 
 
 registerLocaleData(zh);
@@ -47,7 +49,8 @@ registerLocaleData(zh);
     BrowserAnimationsModule,
     DragDropModule,
     AntduiModule,
-    AntdtemplateModule
+    AntdtemplateModule,
+    MaterialuiModule
   ],
   declarations: [
     AppComponent,

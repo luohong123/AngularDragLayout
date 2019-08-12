@@ -37,7 +37,7 @@ export function structure() {
 }
 @Component({
   selector: 'antd-button-template',
-  template: `${structure().template}`,
+  template: `<div> ${structure().template} </div>`,
   styles: [`
   `]
 })

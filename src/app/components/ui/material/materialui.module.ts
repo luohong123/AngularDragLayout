@@ -13,37 +13,21 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 
-import { ButtonComponent } from './button/button.component';
-import { IconComponent } from './icon/icon.component';
-import { RateComponent } from './rate/rate.component';
-import { GridComponent } from './grid/grid.component';
 
 registerLocaleData(zh);
 
 @NgModule({
   entryComponents: [
-    ButtonComponent,
-    IconComponent,
-    RateComponent,
-    GridComponent
   ],
   imports: [
     BrowserModule,
     NgZorroAntdModule
   ],
   declarations: [
-    ButtonComponent,
-    IconComponent,
-    RateComponent,
-    GridComponent
   ],
   exports: [
-    ButtonComponent,
-    IconComponent,
-    RateComponent,
-    GridComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }]
 })
-export class AntdtemplateModule { }
+export class MaterialuiModule { }

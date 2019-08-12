@@ -8,12 +8,13 @@
  */
 import { Injectable } from '@angular/core';
 
-import { ButtonComponent } from '../../components/template/antd/button/button.component';
-import { GridComponent } from '../../components/template/antd/grid/grid.component';
-import { IconComponent } from '../../components/template/antd/icon/icon.component';
-import { RateComponent } from '../../components/template/antd/rate/rate.component';
+
 
 import { AdItemComponent } from '../components/aditem.component';
+import { GridComponent } from 'src/app/components/template/antd/grid/grid.component';
+import { ButtonComponent } from 'src/app/components/template/antd/button/button.component';
+import { IconComponent } from 'src/app/components/template/antd/icon/icon.component';
+import { RateComponent } from 'src/app/components/template/antd/rate/rate.component';
 @Injectable()
 export class AditemService {
   getAds() {

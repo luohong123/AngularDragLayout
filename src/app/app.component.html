@@ -38,7 +38,7 @@
   </nz-header>
   <nz-layout>
     <!-- 拖拽组件 -->
-    <!-- <nz-sider nzWidth="200px">
+    <nz-sider nzWidth="200px">
       <ul nz-menu nzMode="inline" nzTheme="light" class="sider-menu">
         <li nz-menu-item>
           <nz-select style="width: 100px;" nzSize="small" [(ngModel)]="selectedUi" nzAllowClear nzPlaceHolder="请选择UI组件">
@@ -70,8 +70,9 @@
         <li nz-submenu nzOpen nzTitle="通用" nzIcon="laptop">
           <ul>
             <li nz-menu-item>
-              <drag-button class="drag" [draggable]="true" dragName="button">
-              </drag-button>
+              <antd-button-ui [draggable]="true" dragName="button"></antd-button-ui>
+              <!-- <drag-button class="drag" [draggable]="true" dragName="button">
+              </drag-button> -->
             </li>
             <li nz-menu-item>
               图标
@@ -91,7 +92,7 @@
           </ul>
         </li>
       </ul>
-    </nz-sider> -->
+    </nz-sider>
     <nz-layout class="inner-layout">
       <nz-content class="container" #container (dragover)="dragover_handler($event)"
         (dragenter)="dragenter_handler($event)" (drop)="drop_handler($event)">
@@ -105,7 +106,7 @@
         <li nz-menu-item>
           <nz-select style="width: 100px;" nzSize="small" [(ngModel)]="componentType" nzAllowClear
             nzPlaceHolder="请选择UI组件">
-            <nz-option [nzValue]="item.name" [nzLabel]="item.label" *ngFor="let item of componentMarks"></nz-option>
+            <nz-option [nzValue]="item.value" [nzLabel]="item.label" *ngFor="let item of componentMarks"></nz-option>
           </nz-select>
           {{selectedComponent}}
         </li>
