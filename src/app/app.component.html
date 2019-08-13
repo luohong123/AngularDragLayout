@@ -2,7 +2,7 @@
  * @Author: luohong
  * @Date: 2019-08-12 09:09:29
  * @LastEditors: luohong
- * @LastEditTime: 2019-08-12 18:07:14
+ * @LastEditTime: 2019-08-13 14:51:12
  * @Description: 
  * @email: 3300536651@qq.com
  -->
@@ -97,37 +97,35 @@
       <nz-content class="container" #container (dragover)="dragover_handler($event)"
         (dragenter)="dragenter_handler($event)" (drop)="drop_handler($event)">
         <!-- 拖拽组件到这里 -->
-        
+
       </nz-content>
     </nz-layout>
     <!-- 定义组件属性 -->
     <nz-sider nzWidth="200px">
       <ul nz-menu nzMode="inline" nzTheme="light" class="sider-menu">
-        <li nz-menu-item>
+        <li nz-menu-item nzSelected>
           <nz-select style="width: 100px;" nzSize="small" [(ngModel)]="componentType" nzAllowClear
             nzPlaceHolder="请选择UI组件">
             <nz-option [nzValue]="item.value" [nzLabel]="item.label" *ngFor="let item of componentMarks"></nz-option>
           </nz-select>
           {{selectedComponent}}
         </li>
-        <li nz-submenu nzOpen nzIcon="user" nzTitle="组件设置">
-          <ul>
-            <li nz-menu-item>
-              to do
-            </li>
-            <li nz-menu-item>
-              to do
-            </li>
-          </ul>
+        <li nz-menu-item [nzSelected]="false">
+          大小-
+          <nz-select style="width: 120px;" [(ngModel)]="selectedSize" (ngModelChange)="propertyChange($event,'size')"
+            nzSize="small" nzAllowClear nzPlaceHolder="请选择大小">
+            <nz-option [nzValue]="item.value" [nzLabel]="item.label" *ngFor="let item of properties.size"></nz-option>
+          </nz-select>
         </li>
       </ul>
+
     </nz-sider>
   </nz-layout>
 </nz-layout>
 
 <!-- 预览代码 -->
-<nz-drawer [nzMask]="false" [nzClosable]="true" nzWrapClassName="copyCode" [nzMaskStyle]="{'height':'0'}"
-  [nzVisible]="visible" [nzPlacement]="placement" nzTitle="代码预览" (nzOnClose)="closeCode()"
+<nz-drawer #previewCodeDrawer [ngStyle]="{ 'height': '0'}" [nzMask]="true" [nzClosable]="true"
+  nzWrapClassName="copyCode" [nzVisible]="visible" [nzPlacement]="placement" nzTitle="代码预览" (nzOnClose)="closeCode()"
   [nzBodyStyle]="{'overflow':'auto','height': '200px' }">
   <i nzTitle="复制代码" nz-tooltip nz-icon [nzType]="copied ? 'check' : 'snippets'" class="code-box-code-copy"
     [ngStyle]="{'cursor':'pointer'}" [class.ant-tooltip-open]="copied" (click)="copyCode(nzRawCode)"></i>

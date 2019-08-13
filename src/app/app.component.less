@@ -96,6 +96,17 @@ nz-content {
 .grid-setting {
   width: 100px;
 }
-:host ::ng-deep .copyCode .ant-drawer.ant-drawer-open{
-  height:0;
+
+
+:host ::ng-deep .ant-drawer-top.ant-drawer-open,
+:host ::ng-deep .ant-drawer-bottom.ant-drawer-open {
+  height: 0 !important;
+}
+
+:global .ant-drawer {
+  height: 0 !important;
+}
+
+:host ::ng-deep .ant-drawer {
+  height: 0 !important;
 }

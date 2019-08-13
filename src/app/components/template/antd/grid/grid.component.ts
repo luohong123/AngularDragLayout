@@ -2,7 +2,7 @@
  * @Author: luohong
  * @Date: 2019-08-12 09:09:29
  * @LastEditors: luohong
- * @LastEditTime: 2019-08-12 17:47:32
+ * @LastEditTime: 2019-08-13 17:53:59
  * @Description:
  * @email: 3300536651@qq.com
  */
@@ -35,7 +35,6 @@ export function structure() {
   <div nz-row nzGutter="32">
     <div nz-col  nzSpan="12">
     </div>
-    <div nz-col nzSpan="12"></div>
   </div>
   `
   return { template, attributes, slots }
