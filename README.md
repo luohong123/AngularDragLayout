@@ -2,7 +2,7 @@
  * @Author: luohong
  * @Date: 2019-08-07 10:32:58
  * @LastEditors: luohong
- * @LastEditTime: 2019-08-26 14:57:17
+ * @LastEditTime: 2019-08-26 17:33:40
  * @Description: 
  * @email: 3300536651@qq.com
  -->
@@ -21,4 +21,5 @@
 # 打包
 ```bash
 ng build --prod --aot=false --build-optimizer=false --base-href //
+ng build --prod --aot=false --build-optimizer=false --output-path docs --base-href /AngularDragLayout/
 ```
