@@ -2,12 +2,12 @@
  * @Author: luohong
  * @Date: 2019-08-07 10:32:58
  * @LastEditors: luohong
- * @LastEditTime: 2019-08-26 14:00:30
+ * @LastEditTime: 2019-08-26 14:38:59
  * @Description:
  * @email: 3300536651@qq.com
  */
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { registerLocaleData } from '@angular/common';
+import { registerLocaleData, APP_BASE_HREF } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import zh from '@angular/common/locales/zh';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -67,12 +67,14 @@ registerLocaleData(zh);
       provide: NZ_I18N,
       useValue: zh_CN
     },
+    { provide: APP_BASE_HREF, useValue: '/' },
     AditemService,
     CommonService,
     DragService,
     ShareService,
     StoreService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

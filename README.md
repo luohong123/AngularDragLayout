@@ -1,8 +1,8 @@
-<!--
+<!--                                                                                                                      
  * @Author: luohong
  * @Date: 2019-08-07 10:32:58
  * @LastEditors: luohong
- * @LastEditTime: 2019-08-26 14:35:20
+ * @LastEditTime: 2019-08-26 14:46:47
  * @Description: 
  * @email: 3300536651@qq.com
  -->
@@ -14,3 +14,8 @@
 <img src="./media/1.jpg" width="90%" />
 - 预览代码
 <img src="./media/2.jpg" width="90%" />
+
+# 打包
+```bash
+ng build --prod --aot=false --build-optimizer=false
+```
