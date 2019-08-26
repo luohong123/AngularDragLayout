@@ -2,11 +2,11 @@
  * @Author: luohong
  * @Date: 2019-08-12 09:09:29
  * @LastEditors: luohong
- * @LastEditTime: 2019-08-12 16:56:37
+ * @LastEditTime: 2019-08-26 14:08:22
  * @Description: 
  * @email: 3300536651@qq.com
  */
-import { Component, OnInit, HostBinding, OnChanges, ElementRef, ViewRef, ɵComponentDef, ViewContainerRef, Input, ViewChild, TemplateRef, AfterViewInit, Renderer2, ComponentFactoryResolver, NgModule, NgModuleFactory, Compiler } from '@angular/core';
+import { Component, OnInit, HostBinding, OnChanges, ElementRef, ViewRef, ɵComponentDef, ViewContainerRef, Input, ViewChild, TemplateRef, AfterViewInit, Renderer2, ComponentFactoryResolver, NgModule, NgModuleFactory, Compiler, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TemplateAst, TemplateBindingParseResult, TemplateParser } from '@angular/compiler';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
@@ -60,11 +60,13 @@ export class PreviewComponent implements OnInit, OnChanges, AfterViewInit {
   private createComponentModule(componentType: any): any {
     const runtimeComponentModule = NgModule({
       imports: [
-        NgZorroAntdModule
+        NgZorroAntdModule,
+
       ],
       declarations: [
         componentType
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       entryComponents: [componentType]
     })(class RuntimeComponentModule { });
 

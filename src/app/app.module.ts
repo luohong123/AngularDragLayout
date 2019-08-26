@@ -2,7 +2,7 @@
  * @Author: luohong
  * @Date: 2019-08-07 10:32:58
  * @LastEditors: luohong
- * @LastEditTime: 2019-08-12 18:02:49
+ * @LastEditTime: 2019-08-26 14:00:30
  * @Description:
  * @email: 3300536651@qq.com
  */
@@ -10,7 +10,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import zh from '@angular/common/locales/zh';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,6 +32,7 @@ import { DragService } from './core/service/drag.service';
 import { StoreService } from './core/service/store.service';
 import { MaterialuiModule } from './components/ui/material/materialui.module';
 import { AntduiModule } from './components/ui/antd/index.module';
+import { ShareService } from './core/service/share.service';
 
 
 registerLocaleData(zh);
@@ -69,7 +70,9 @@ registerLocaleData(zh);
     AditemService,
     CommonService,
     DragService,
+    ShareService,
     StoreService],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

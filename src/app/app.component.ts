@@ -3,7 +3,7 @@
  * @Author: luohong
  * @Date: 2019-08-07 10:32:58
  * @LastEditors: luohong
- * @LastEditTime: 2019-08-13 17:54:29
+ * @LastEditTime: 2019-08-14 17:22:13
  * @Description:
  * @email: 3300536651@qq.com
  */
@@ -11,7 +11,7 @@ import { DOCUMENT } from '@angular/common';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {
   ChangeDetectorRef, Component, ComponentFactoryResolver, ComponentRef, ElementRef,
-  Inject, Input, OnInit, Renderer2, Type, ViewChild, ViewContainerRef, Injector, TemplateRef
+  Inject, Input, OnInit, Renderer2, Type, ViewChild, ViewContainerRef, Injector, TemplateRef, ReflectiveInjector
 } from '@angular/core';
 
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
@@ -21,6 +21,7 @@ import { AdItemComponent } from './core/components/aditem.component';
 import { AditemService } from './core/service/aditem.service';
 import { PreviewComponent } from './core/components/preview/preview.component';
 import { StoreService } from './core/service/store.service';
+import { ShareService } from './core/service/share.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -76,10 +77,15 @@ export class AppComponent implements OnInit {
       { label: '小', value: 'small' }
     ]
   }
+  // 是否插槽
+  isSlot = 'N'
+  // 插槽组件的id
+  slotId: string
   // 代码预览抽屉
   @ViewChild('previewCodeDrawer', { read: ViewContainerRef, static: false }) previewCodeDrawer: ViewContainerRef
   // 容器
   @ViewChild('container', { read: ViewContainerRef, static: false }) viewContainerRef: ViewContainerRef;
+  @ViewChild('container', { static: false }) containerTemplate: ElementRef;
   constructor(private renderer: Renderer2,
     private injector: Injector,
     private componentFactoryResolver: ComponentFactoryResolver,
@@ -87,8 +93,24 @@ export class AppComponent implements OnInit {
     private commonService: CommonService,
     @Inject(DOCUMENT) private dom: any,
     private modalService: NzModalService,
+    public shareService: ShareService,
     private message: NzMessageService,
     private cdr: ChangeDetectorRef, private aditemService: AditemService) {
+    this.shareService.subject.subscribe(data => {
+      switch (data.eventName) {
+        case 'grid1': // 动态添加子组件，潜入到删格组件中
+          // let component = this.ads.filter(item => {
+          //   return item.data['name'] === event.dataTransfer.types[0]
+          // })
+          this.isSlot = 'Y'
+          this.slotId = data.param.id
+          let gridRef = data.param.ref
+          this.loadDynamicComponent(this.ads[1].component, gridRef, this.ads[1], data.param.renderer)
+          break;
+        default:
+          break;
+      }
+    });
   }
   ngOnInit(): void {
     this.ads = this.aditemService.getAds()
@@ -101,6 +123,7 @@ export class AppComponent implements OnInit {
    * @param event
    */
   dragover_handler(event) {
+    this.isSlot = 'N'
     event.preventDefault();
   }
   dragenter_handler(event) {
@@ -116,64 +139,71 @@ export class AppComponent implements OnInit {
       return item.data['name'] === event.dataTransfer.types[0]
     })
     if (event.target.className && event.target.className.includes('container')) {
-      this.loadDynamicComponent(component[0].component, component[0])
+    }
+    if (this.isSlot === 'N') {
+      this.loadDynamicComponent(component[0].component, this.viewContainerRef, component[0])
     }
   }
   /**
    * 添加布局
    * @param parentNode
    */
-  loadDynamicComponent(component: Type<any>, data: any) {
+  loadDynamicComponent(component: Type<any>, ref: ViewContainerRef, data: any, renderer?: Renderer2) {
+    console.log(this.isSlot)
     const factory = this.componentFactoryResolver.resolveComponentFactory(component);
-    this.dynamicComponent = this.viewContainerRef.createComponent(factory);
+    this.dynamicComponent = ref.createComponent(factory);
     let id = this.dynamicComponent.instance['id']
-    let parentRef;
-    this.code1 += this.dynamicComponent.instance.getAttributes(this.dynamicComponent.instance['id']);
-    if (!this.dynamicComponent.instance['id']
-      || this.dynamicComponent.instance['id'] === ''
-      || this.dynamicComponent.instance['id'] === undefined
-      || this.dynamicComponent.instance['id'] === null) {
+    this.code1 += this.dynamicComponent.instance.getAttributes(id);
+    if (!id || id === '' || id === undefined || id === null) {
       this.dynamicComponent.instance['id'] = this.commonService.uuidv4();
     }
-    this.renderer.listen(this.dynamicComponent.location.nativeElement, 'dragover', (event) => {
-      console.log('dragover')
-      if (data.data.name === 'grid1') {
-        console.log('是否放到grid1里面')
-        console.log(this.viewContainerRef.element.nativeElement)
-      }
-    })
-    this.renderer.listen(this.dynamicComponent.location.nativeElement, 'drop', (event) => {
-      console.log('drop');
-      if (data.data.name === 'grid1') {
+    // 拖拽删格组件
+    // this.renderer.listen(this.dynamicComponent.location.nativeElement, 'dragover', (event) => {
 
-        this.slotDynamicComponent(event, parentRef)
+    // })
+    // this.renderer.listen(this.dynamicComponent.location.nativeElement, 'dragenter', (event) => {
+    //   console.log('dragenter')
+    // })
+    // this.renderer.listen(this.dynamicComponent.location.nativeElement, 'click', (event) => {
+    //   this.selectedComponent = data.data.name
+    // })
+    // 不插槽
+    if (this.isSlot === 'N') {
+      this.renderer.appendChild(
+        ref.element.nativeElement,
+        this.dynamicComponent.location.nativeElement
+      )
+    } else {
+      // 通过 id 查找 动态父组件
+      // 插槽
+      // renderer.appendChild(
+      //   ref.element.nativeElement,
+      //   this.dynamicComponent.location.nativeElement
+      // )
+      // let idMark = '#' + this.slotId
+      // const exampleDiv = this.containerTemplate.nativeElement.querySelector(idMark);
+      // exampleDiv.appendChild(this.dynamicComponent.location.nativeElement)
+      // let newC = ref.createComponent(factory, 0)
+      this.renderer.appendChild(
+        ref.element.nativeElement,
+        this.dynamicComponent.location.nativeElement
+      )
+    }
 
-      }
-
-    })
-    this.renderer.listen(this.dynamicComponent.location.nativeElement, 'dragenter', (event) => {
-      console.log('dragenter')
-    })
-    this.renderer.listen(this.dynamicComponent.location.nativeElement, 'click', (event) => {
-      this.selectedComponent = data.data.name
-    })
-    this.renderer.appendChild(
-      this.viewContainerRef.element.nativeElement,
-      this.dynamicComponent.location.nativeElement
-    );
     this.dynamicComponents.push(this.dynamicComponent)
   }
-  slotDynamicComponent(event, ref: any) {
-    let component = this.ads.filter(item => {
-      return item.data['name'] === event.dataTransfer.types[0]
-    })
-    let factory = this.componentFactoryResolver.resolveComponentFactory(component[0].component);
-    let childDynamicComponent = ref.createComponent(factory);
-    this.renderer.appendChild(
-      ref.element.nativeElement,
-      childDynamicComponent.location.nativeElement
-    );
-  }
+
+  // slotDynamicComponent(event, ref: any) {
+  //   let component = this.ads.filter(item => {
+  //     return item.data['name'] === event.dataTransfer.types[0]
+  //   })
+  //   let factory = this.componentFactoryResolver.resolveComponentFactory(component[0].component);
+  //   let childDynamicComponent = ref.createComponent(factory);
+  //   this.renderer.appendChild(
+  //     ref.element.nativeElement,
+  //     childDynamicComponent.location.nativeElement
+  //   );
+  // }
   /**
    * 预览
    */

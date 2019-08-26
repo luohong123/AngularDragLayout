@@ -2,11 +2,11 @@
  * @Author: luohong
  * @Date: 2019-08-08 14:52:47
  * @LastEditors: luohong
- * @LastEditTime: 2019-08-12 17:47:04
+ * @LastEditTime: 2019-08-26 14:07:26
  * @Description:
  * @email: 3300536651@qq.com
  */
-import { Component } from '@angular/core';
+import { Component, OnInit, OnChanges, HostBinding } from '@angular/core';
 export function structure() {
   let attributes = {
     title: {
@@ -37,9 +37,21 @@ export function structure() {
 }
 @Component({
   selector: 'antd-rate-template',
-  template: `${structure().template}`,
+  template: `<div>${structure().template}</div>`,
   styles: [`
   `]
 })
-export class RateComponent {
+export class RateComponent implements OnInit, OnChanges {
+  @HostBinding('id') id: string;
+  ngOnInit(): void {
+    this.getAttributes(this.id)
+
+  }
+  ngOnChanges(): void {
+  }
+  getAttributes(id: string) {
+    let obj = localStorage.getItem('store')
+    let template = structure().template
+    return template
+  }
 }
