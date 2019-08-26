@@ -20,5 +20,5 @@
 
 # 打包
 ```bash
-ng build --prod --aot=false --build-optimizer=false
+ng build --prod --aot=false --build-optimizer=false --base-href //
 ```
